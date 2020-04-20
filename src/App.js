@@ -1,24 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+
 import './App.css';
 
 function App() {
+
+  const [news, setNews] = useState([])
+  const [searchQuery, setSearchQuery] = useState('react')
+  const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=react')
+  const [loading, setLoading] = useState(false)
+
+  const fetchNews = async () => {
+    try {
+      setLoading(true)
+      const data = await fetch(url)
+      const response = await data.json()
+      setNews(response.hits)
+      setLoading(false)
+    }
+    catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  useEffect(() => {
+    fetchNews()
+  }, [url])
+
+  const handleChange = e => {
+    setSearchQuery(e.target.value)
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    setUrl(`http://hn.algolia.com/api/v1/search?query=${searchQuery}`)
+  }
+
+  const showLoading = () => loading ? <h3>Loading...</h3> : ""
+
+  const searchForm = () => (
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={searchQuery} onChange={handleChange} />
+      <button>Search</button> 
+    </form>
+  )
+
+  const showNews = () => (
+    news.map((article, index) => (
+      <p key={index}>{article.title}<a href={article.url}> link</a></p>
+    ))
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="container">
+      <h1>TECH NEWS</h1>
+      {showLoading()}
+      {searchForm()}
+      {showNews()}
     </div>
   );
 }
