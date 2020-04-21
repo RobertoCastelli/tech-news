@@ -4,7 +4,7 @@ import './App.css';
 export default function App() {
 
   const [news, setNews] = useState([])
-  const [searchQuery, setSearchQuery] = useState('query...')
+  const [searchQuery, setSearchQuery] = useState('react')
   const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=react')
   const [loading, setLoading] = useState(false)
 
@@ -13,7 +13,6 @@ export default function App() {
       setLoading(true)
       const data = await fetch(url)
       const response = await data.json()
-      console.log(response.hits.length)
       setNews(response.hits)
       setLoading(false)
     }
@@ -44,16 +43,16 @@ export default function App() {
   //----------------//
   //---COMPONENTS---//
   //----------------//
-  const ShowLoading = () => loading ? <h3>Loading...</h3> : ""
+  const showLoading = () => loading ? <h3>Loading...</h3> : ""
 
-  const SearchForm = () => (
+  const searchForm = () => (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={searchQuery} onChange={handleChange} onFocus={e => e.target.value=''} />
+      <input type="text" value={searchQuery} onChange={handleChange} onFocus={e => e.target.value = ''} />
       <button>Search</button> 
     </form>
   )
 
-  const ShowNews = () => (
+  const showNews = () => (
     news.map((article, index) => (
       <p key={index}>{article.title} <a href={article.url}>LINK</a></p>
     ))
@@ -69,13 +68,12 @@ export default function App() {
   return (
     <div className="container">
       <h1>TECH NEWS</h1>
-      <SearchForm />
+      {searchForm()}
       <h3>n°{news.length} ARTICLES</h3>
-      <ShowLoading />
-      <ShowNews />
+      {showLoading()}
+      {showNews()}
+      <hr/>
       <Footer />
     </div>
   );
 }
-
-
