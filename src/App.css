@@ -1,0 +1,48 @@
+.container {
+    letter-spacing: 0.05rem;
+    font-family: monospace;
+    color: rgb(53, 72, 94);
+    margin: auto;
+    max-width: 400px;
+    padding: 10px;
+    height: 100vh;
+
+}
+form {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button {
+    background-color: cadetblue;
+    border: 1px solid rgb(53, 72, 94);
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    
+}
+
+button:hover {
+    background-color: teal;
+}
+
+input {
+    border: none;
+    border-bottom: 2px solid rgb(53, 72, 94);
+    width: 100%;
+}
+
+a {
+    color: hotpink;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+h1, 
+.footer {
+    text-align: center;
+}
