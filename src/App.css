@@ -6,7 +6,6 @@
     max-width: 400px;
     padding: 10px;
     height: 100vh;
-
 }
 form {
     display: flex;
@@ -23,7 +22,6 @@ button {
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    
 }
 
 button:hover {
