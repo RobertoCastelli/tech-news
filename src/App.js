@@ -37,7 +37,7 @@ export default function App() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    setUrl(`http://hn.algolia.com/api/v1/search?query=${searchQuery}`)
+    setUrl(`https://hn.algolia.com/api/v1/search?query=${searchQuery}`)
   }
 
   //----------------//
